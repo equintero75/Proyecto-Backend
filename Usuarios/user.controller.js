@@ -1,17 +1,17 @@
 import User from './user.model';
 
-export async function getUser(req, res){
-    try {
-      const user = await UserModel.findById(req.params.id);
-      if (!user) {
-        return res.status(404).json({ message: 'Usuario no encontrado' });
-      }
-      res.status(200).json(user);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error al buscar el usuario' });
+export async function getUser(req, res) {
+  try {
+    const user = await UserModel.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
     }
-  };
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al buscar el usuario' });
+  }
+}
 
 export async function createUser(req, res) {
   try {
@@ -42,7 +42,7 @@ export async function createUser(req, res) {
   }
 }
 
-export async function patchUser(req, res){
+export async function patchUser(req, res) {
   try {
     const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!user) {
@@ -53,17 +53,19 @@ export async function patchUser(req, res){
     console.error(error);
     res.status(500).json({ message: 'Error al actualizar el usuario' });
   }
-};
+}
 
-export async function deleteUser(req, res){
+export async function deleteUser(req, res) {
   try {
-    const user = await UserModel.findByIdAndUpdate(req.params.id, { $set: { habilitado: false } });
+    const user = await UserModel.findByIdAndRemove(req.params.id);
+
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
-    res.status(200).json({ message: 'Usuario inhabilitado exitosamente' });
+
+    res.status(200).json({ message: 'Usuario eliminado exitosamente' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al inhabilitar el usuario' });
+    res.status(500).json({ message: 'Error al eliminar el usuario' });
   }
-};
+}

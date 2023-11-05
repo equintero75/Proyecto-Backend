@@ -25,9 +25,15 @@ const restauranteSchema = new mongoose.Schema({
     {
       nombre: String,
       descripcion: String,
+      categoria: String,
       precio: Number,
-    },
+    }
+    ,
   ],
+  administrador: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Nombre del modelo de usuario (administrador)
+  },
 });
 
 export default mongoose.model('Restaurante', restauranteSchema);

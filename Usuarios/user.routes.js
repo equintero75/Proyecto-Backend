@@ -1,4 +1,4 @@
-import { createUser, deleteEmpanada, getUser, patchUser } from "./user.controller";
+import { createUser, deleteUser, getUser, patchUser } from "./user.controller";
 import {Router} from 'express';
 const router = Router();
 
@@ -13,6 +13,6 @@ router.post('/users/create', createUser);
 router.patch('/users/edit', patchUser);
 
 // Endpoint DELETE /prueba
-router.delete('/', deleteEmpanada );
+router.delete('/users/delete', deleteUser );
 
 export default router;

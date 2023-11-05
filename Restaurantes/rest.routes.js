@@ -1,17 +1,23 @@
-import { createEmpanada, deleteEmpanada, getEmpanada, patchEmpanada, requireAdminAuth } from "./rest.controller";
-import {Router} from 'express';
+import {
+  createRestaurante,
+  deleteEmpanada,
+  getEmpanada,
+  patchEmpanada,
+  requireAdminAuth,
+} from './rest.controller';
+import { Router } from 'express';
 const router = Router();
 
 // Endpoint GET /prueba
-router.get('/', getEmpanada );
+router.get('/', getEmpanada);
 
 // Endpoint POST /prueba
-router.post('/', requireAdminAuth, createEmpanada );
+router.post('/rest/create', requireAdminAuth, createRestaurante);
 
 // Endpoint PATCH /prueba
-router.patch('/', patchEmpanada );
+router.patch('/', patchEmpanada);
 
 // Endpoint DELETE /prueba
-router.delete('/', deleteEmpanada );
+router.delete('/', deleteEmpanada);
 
 export default router;
