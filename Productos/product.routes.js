@@ -17,9 +17,9 @@ router.get('/product/search', requireAdminAuth, getProductos);
 router.post('/product/create', requireAdminAuth, createProduct);
 
 // Endpoint PATCH /prueba
-router.patch('/product/edit', patchProduct);
+router.patch('/product/edit', requireAdminAuth, patchProduct);
 
 // Endpoint DELETE /prueba
-router.delete('/product/delete', deleteProduct);
+router.delete('/product/delete', requireAdminAuth, deleteProduct);
 
 export default router;

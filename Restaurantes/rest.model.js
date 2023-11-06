@@ -13,14 +13,6 @@ const restauranteSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  tiempoEstimadoEnvio: {
-    type: String,
-    required: true,
-  },
-  costoEnvio: {
-    type: Number,
-    required: true,
-  },
   menu: [
     {
       nombre: String,

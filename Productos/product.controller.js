@@ -5,7 +5,7 @@ export async function getProducto(req,res){
   try {
     const productoId = req.params.productoId;
 
-    const producto = await ProductoModel.findById(productoId);
+    const producto = await Producto.findById(productoId);
 
     if (!producto) {
       return res.status(404).json({ message: 'Producto no encontrado' });
@@ -31,7 +31,7 @@ export async function getProductos(req, res){
       filtro.categoria = categoria;
     }
 
-    const productos = await ProductoModel.find(filtro);
+    const productos = await Producto.find(filtro);
     res.status(200).json(productos);
   } catch (error) {
     console.error(error);
@@ -68,7 +68,7 @@ export async function patchProduct(req, res){
     const { nombre, descripcion, categoria, precio } = req.body;
 
     // Verifica si el producto pertenece al restaurante
-    const producto = await ProductoModel.findOne({ _id: productoId, restaurante: restauranteId });
+    const producto = await Producto.findOne({ _id: productoId, restaurante: restauranteId });
 
     if (!producto) {
       return res.status(404).json({ message: 'Producto no encontrado en el inventario' });
@@ -102,7 +102,7 @@ export async function deleteProduct(req, res){
     const restauranteId = req.params.restauranteId;
 
     // Verifica si el producto pertenece al restaurante
-    const producto = await ProductoModel.findOne({ _id: productoId, restaurante: restauranteId });
+    const producto = await Producto.findOne({ _id: productoId, restaurante: restauranteId });
 
     if (!producto) {
       return res.status(404).json({ message: 'Producto no encontrado en el inventario' });

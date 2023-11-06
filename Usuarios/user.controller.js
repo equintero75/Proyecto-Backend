@@ -2,7 +2,7 @@ import User from './user.model';
 
 export async function getUser(req, res) {
   try {
-    const user = await UserModel.findById(req.params.id);
+    const user = await User.findById(req.params.id);
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
@@ -18,7 +18,7 @@ export async function createUser(req, res) {
     const { email, name, password, phoneNumber, address, userType } = req.body;
 
     // Verifica si el correo electrónico ya está en uso
-    const usuarioExistente = await UserModel.findOne({ email });
+    const usuarioExistente = await User.findOne({ email });
     if (usuarioExistente) {
       return res.status(400).json({ message: 'El correo electrónico ya está en uso' });
     }
@@ -44,7 +44,7 @@ export async function createUser(req, res) {
 
 export async function patchUser(req, res) {
   try {
-    const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
@@ -57,7 +57,7 @@ export async function patchUser(req, res) {
 
 export async function deleteUser(req, res) {
   try {
-    const user = await UserModel.findByIdAndRemove(req.params.id);
+    const user = await User.findByIdAndRemove(req.params.id);
 
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
