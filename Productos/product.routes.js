@@ -11,7 +11,7 @@ const router = Router();
 
 // Endpoint GET /prueba
 router.get('/product/search', requireAdminAuth, getProducto);
-router.get('/product/search', requireAdminAuth, getProductos);
+router.get('/product/searchf', requireAdminAuth, getProductos);
 
 // Endpoint POST /prueba
 router.post('/product/create', requireAdminAuth, createProduct);

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const productoSchema = require('../Productos/product.model')
 
 const restauranteSchema = new mongoose.Schema({
   nombre: {
@@ -13,18 +14,11 @@ const restauranteSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  menu: [
-    {
-      nombre: String,
-      descripcion: String,
-      categoria: String,
-      precio: Number,
-    }
-    ,
-  ],
+  productos: [productoSchema],
   administrador: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // Nombre del modelo de usuario (administrador)
+    required: true,
   },
 });
 

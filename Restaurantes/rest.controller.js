@@ -1,11 +1,49 @@
 import Restaurante from './rest.model';
-export async function getEmpanada(req,res) {
-  // const { name } = req.query;
 
-  const empanadas = await Empanada.find(req.query);
+export async function getRestaurante(req,res) {
+  try {
+    const restauranteId = req.params.id;
+    
+    // Consulta el restaurante por su ID
+    const restaurante = await Restaurante.findById(restauranteId);
 
-  res.status(200).json(empanadas);
-}
+    if (!restaurante) {
+      return res.status(404).json({ message: 'Restaurante no encontrado' });
+    }
+
+    res.status(200).json(restaurante);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al consultar el restaurante por ID' });
+  }
+};
+
+export async function getRestauranteFiltro(req, res){
+  try {
+    const categoria = req.query.categoria; // Parámetro de categoría proporcionado en la solicitud
+    const busqueda = req.query.busqueda; // Parámetro de búsqueda proporcionado en la solicitud
+
+    const filters = {};
+
+    // Aplica filtro por categoría si se proporciona
+    if (categoria) {
+      filters.categoria = categoria;
+    }
+
+    // Aplica filtro por nombre si se proporciona
+    if (busqueda) {
+      filters.nombre = { $regex: new RegExp(busqueda, 'i') }; // Búsqueda no sensible a mayúsculas y minúsculas
+    }
+
+    // Consulta restaurantes basados en los filtros
+    const restaurantes = await Restaurante.find(filters);
+
+    res.status(200).json(restaurantes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al consultar restaurantes por categoría y/o búsqueda' });
+  }
+};
 
 export async function createRestaurante(req, res){
   try {
@@ -25,13 +63,51 @@ export async function createRestaurante(req, res){
   }
 };
 
-export async function patchEmpanada(req, res) {
-  res.status(200).json({});
-}
+export async function patchRestaurante(req, res) {
+  try {
+    const restauranteId = req.params.id;
+    const actualizaciones = req.body; // Datos de actualización proporcionados en el cuerpo de la solicitud
 
-export async function deleteEmpanada(req, res) {
-  res.status(200).json({});
-}
+    // Verifica si el restaurante existe
+    const restaurante = await Restaurante.findById(restauranteId);
+
+    if (!restaurante) {
+      return res.status(404).json({ message: 'Restaurante no encontrado' });
+    }
+
+    // Actualiza el restaurante con los datos proporcionados
+    const restauranteActualizado = await Restaurante.findByIdAndUpdate(
+      restauranteId,
+      actualizaciones,
+      { new: true }
+    );
+
+    res.status(200).json(restauranteActualizado);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al actualizar el restaurante' });
+  }
+};
+
+export async function deleteRestaurante(req, res) {
+  try {
+    const restauranteId = req.params.id;
+
+    const restaurante = await Restaurante.findById(restauranteId);
+
+    if (!restaurante) {
+      return res.status(404).json({ message: 'Restaurante no encontrado' });
+    }
+
+    // Elimina el restaurante por su ID
+    await Restaurante.findByIdAndDelete(restauranteId);
+
+    res.status(200).json({ message: 'Restaurante eliminado exitosamente' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al eliminar el restaurante' });
+  }
+};
 
 export async function requireAdminAuth(req, res, next){
   try {

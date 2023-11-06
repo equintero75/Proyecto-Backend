@@ -1,27 +1,26 @@
 import {
   createPedido,
-  deleteEmpanada,
+  deletePedido,
   getPedido,
   getPedidoFiltros,
   getPedidoPendiente,
-  patchEmpanada,
+  patchPedido,
 } from './pedido.controller';
-import { requireAdminAuth } from '../Restaurantes/rest.controller';
 import { Router } from 'express';
 const router = Router();
 
 // Endpoint GET /prueba
-router.get('/', getPedido);
-router.get('/', getPedidoFiltros);
-router.get('/', getPedidoPendiente);
+router.get('/pedido/buscar', getPedido);
+router.get('/pedido/buscarf', getPedidoFiltros);
+router.get('/pedido/pendientes', getPedidoPendiente);
 
 // Endpoint POST /prueba
-router.post('/', createPedido);
+router.post('/pedido/crear', createPedido);
 
 // Endpoint PATCH /prueba
-router.patch('/', patchEmpanada);
+router.patch('/pedido/editar', patchPedido);
 
 // Endpoint DELETE /prueba
-router.delete('/', deleteEmpanada);
+router.delete('/pedido/cancel', deletePedido);
 
 export default router;
