@@ -1,12 +1,11 @@
 import {
   createRestaurante,
-  deleteEmpanada,
   deleteRestaurante,
   getRestaurante,
   getRestauranteFiltro,
   patchRestaurante,
   requireAdminAuth,
-} from './rest.controller';
+} from './rest.controller.js';
 import { Router } from 'express';
 const router = Router();
 

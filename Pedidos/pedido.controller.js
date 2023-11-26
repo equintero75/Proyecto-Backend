@@ -1,4 +1,4 @@
-import Pedido from './pedido.model';
+import Pedido from './pedido.model.js';
 
 export async function getPedido(req, res) {
   try {

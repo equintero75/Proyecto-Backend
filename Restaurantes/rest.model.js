@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const productoSchema = require('../Productos/product.model')
+import mongoose from 'mongoose';
+import { productoSchema } from '../Productos/product.model.js';
 
 const restauranteSchema = new mongoose.Schema({
   nombre: {

@@ -4,8 +4,8 @@ import {
   getProducto,
   getProductos,
   patchProduct,
-} from './product.controller';
-import { requireAdminAuth } from '../Restaurantes/rest.controller';
+} from './product.controller.js';
+import { requireAdminAuth } from '../Restaurantes/rest.controller.js';
 import { Router } from 'express';
 const router = Router();
 

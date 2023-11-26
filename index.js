@@ -30,10 +30,10 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
-import userRoutes from './Usuarios/user.routes'
-import restRoutes from './Restaurantes/rest.routes'
-import productRoutes from './Productos/product.routes'
-import pedidoRoutes from './Pedidos/pedido.routes'
+import userRoutes from './Usuarios/user.routes.js'
+import restRoutes from './Restaurantes/rest.routes.js'
+import productRoutes from './Productos/product.routes.js'
+import pedidoRoutes from './Pedidos/pedido.routes.js'
 
 app.use('/user', userRoutes)
 app.use('/rest', restRoutes)

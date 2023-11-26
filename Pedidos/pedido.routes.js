@@ -5,7 +5,7 @@ import {
   getPedidoFiltros,
   getPedidoPendiente,
   patchPedido,
-} from './pedido.controller';
+} from './pedido.controller.js';
 import { Router } from 'express';
 const router = Router();
 

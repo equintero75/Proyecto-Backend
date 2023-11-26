@@ -1,5 +1,5 @@
 
-import Producto from './product.model';
+import Producto from './product.model.js';
 
 export async function getProducto(req,res){
   try {

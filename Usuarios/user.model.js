@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   },
   userType: {
     type: String,
-    enum: ['cliente', 'administrador'], // Puedes agregar otros tipos de usuarios si es necesario
+    enum: ['cliente', 'administrador'],
     default: 'cliente', // Valor por defecto
     required: true
   },
